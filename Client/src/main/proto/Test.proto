@@ -1,0 +1,32 @@
+syntax = "proto3";
+package com.id.grpc;
+import "google/protobuf/timestamp.proto";
+
+message SendMessageRequest{
+  string message = 1;
+}
+
+message SendMessageResponse{
+  string answer = 1;
+}
+
+message ReturnMessageRequest{
+  google.protobuf.Timestamp startDate = 1;
+  google.protobuf.Timestamp endDate = 2;
+}
+
+message ReturnMessageResponse{
+ repeated Messages messsage = 1;
+}
+
+message Messages{
+  string id = 1;
+  string message =2;
+  google.protobuf.Timestamp date = 3;
+}
+
+service TestMessageService{
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+  rpc ReturnMessage(ReturnMessageRequest) returns (ReturnMessageResponse);
+
+}
